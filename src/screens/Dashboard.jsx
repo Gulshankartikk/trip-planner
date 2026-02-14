@@ -5,7 +5,7 @@ import { useNavigation, SCREENS } from '../context/NavigationState';
 import { Search, MapPin, Calendar, Plus, ChevronRight, TrendingUp } from 'lucide-react';
 
 const Dashboard = () => {
-    const { navigate } = useNavigation();
+    const { navigate, setTripData, tripData } = useNavigation();
 
     const upcomingTrips = [
         { id: 1, destination: 'Paris, France', date: 'Sep 12 - Sep 18', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80' },
@@ -97,13 +97,13 @@ const Dashboard = () => {
                     <TrendingUp size={20} color="var(--accent-teal)" />
                 </div>
 
-                <Card style={{ padding: '16px', display: 'flex', gap: '16px' }}>
+                <Card style={{ padding: '16px', display: 'flex', gap: '16px' }} onClick={() => { setTripData({ ...tripData, destination: 'Nainital' }); navigate(SCREENS.AI_PLANNER); }}>
                     <div style={{ width: '80px', height: '80px', borderRadius: '12px', overflow: 'hidden' }}>
-                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="Swiss Alps" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=200&q=80" alt="Nainital" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <h3 style={{ fontSize: '16px', fontWeight: '700' }}>Swiss Alps Retreat</h3>
-                        <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>Perfect for your adventure travel style.</p>
+                        <h3 style={{ fontSize: '16px', fontWeight: '700' }}>Explore Nainital</h3>
+                        <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>Peaceful lakes and Himalayan views await.</p>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px', color: 'var(--accent-primary)', fontSize: '13px', fontWeight: '600' }}>
                             <span>Plan now</span>
                             <ChevronRight size={14} />
