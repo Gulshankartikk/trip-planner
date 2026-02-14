@@ -13,10 +13,15 @@ export const Profile = () => (
         <h1 style={{ fontSize: '28px', fontWeight: '800', marginBottom: '24px' }}>Profile</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
             <div style={{ width: '80px', height: '80px', borderRadius: '40px', overflow: 'hidden', border: '3px solid var(--accent-primary)' }}>
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img
+  src="C:\Users\kg872\Desktop\trip planner\src\assets\gulshankartik.jpg"
+  alt="Avatar"
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+/>
+
             </div>
             <div>
-                <h2 style={{ fontSize: '20px', fontWeight: '700' }}>John Doe</h2>
+                <h2 style={{ fontSize: '20px', fontWeight: '700' }}>Gulshan Kartik</h2>
                 <p style={{ color: 'var(--text-secondary)' }}>Explorer Gold Member</p>
             </div>
         </div>

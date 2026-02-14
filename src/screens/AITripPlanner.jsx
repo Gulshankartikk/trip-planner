@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation, SCREENS } from '../context/NavigationState';
-import { Sparkles, CheckCircle2, Map, Calendar, Coffee, Utensils, Camera, Waves, Landmark, ShoppingBag, Mountain, Wind } from 'lucide-react';
+import { Sparkles, CheckCircle2, Map, Calendar, Coffee, Utensils, Camera, Waves, Landmark, ShoppingBag, Mountain, Wind, Zap, Flame, Heart } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const AITripPlanner = () => {
@@ -23,15 +23,9 @@ const AITripPlanner = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const isNainital = tripData.destination.toLowerCase().includes('nainital');
-
-    const mockItinerary = [
-        { time: '09:00 AM', activity: 'Breakfast at local cafe', icon: Coffee },
-        { time: '11:00 AM', activity: 'Visit the main city square', icon: Map },
-        { time: '01:30 PM', activity: 'Lunch at traditional restaurant', icon: Utensils },
-        { time: '04:00 PM', activity: 'Scenic viewpoint photography', icon: Camera },
-        { time: '07:30 PM', activity: 'Evening sunset cruise', icon: Calendar }
-    ];
+    const destination = tripData.destination.toLowerCase();
+    const isNainital = destination.includes('nainital');
+    const isRishikesh = destination.includes('rishikesh');
 
     const nainitalItinerary = [
         {
@@ -66,6 +60,49 @@ const AITripPlanner = () => {
         }
     ];
 
+    const rishikeshItinerary = [
+        {
+            day: 1,
+            title: 'Spiritual Vibes & Ganga Aarti',
+            activities: [
+                { time: 'Morning', activity: 'Laxman Jhula & Ram Jhula', icon: Landmark, detail: 'Walk across famous suspension bridges. Stop for photos and river views.' },
+                { time: 'Afternoon', activity: 'Cafe Hopping', icon: Coffee, detail: 'Relax at Little Buddha Cafe or Freedom Cafe overlooking the Ganges.' },
+                { time: 'Evening', activity: 'Ganga Aarti at Triveni Ghat', icon: Flame, detail: 'Witness the divine oil lamp ceremony at sunset. Truly mesmerizing ✨' }
+            ],
+            tip: 'Avoid wearing revealing clothes near temples/Aarti.'
+        },
+        {
+            day: 2,
+            title: 'Adventure & Waterfalls',
+            activities: [
+                { time: 'Morning', activity: 'River Rafting', icon: Waves, detail: 'Experience the thrill of rafting through Grade 1 & 2 rapids. (16km/24km)' },
+                { time: 'Afternoon', activity: 'Neer Garh Waterfall', icon: Mountain, detail: 'Short trek to beautiful tiered waterfalls. Perfect for a quick dip.' },
+                { time: 'Evening', activity: 'Local Market Exploration', icon: ShoppingBag, detail: 'Shop for spiritual items, crystals, and Himalayan herbs in Rishikesh town.' }
+            ],
+            tip: 'Pre-book rafting to avoid last minute price hikes.'
+        },
+        {
+            day: 3,
+            title: 'Ashrams & Inner Peace',
+            activities: [
+                { time: 'Morning', activity: 'Beatles Ashram', icon: Heart, detail: 'Explore the ruins of Chaurasi Kutia where the Beatles stayed in 1968.' },
+                { time: 'Afternoon', activity: 'Yoga & Meditation', icon: Wind, detail: 'Join a drop-in yoga class at Parmarth Niketan or Sivananda Ashram.' },
+                { time: 'Evening', activity: 'Parmarth Niketan Aarti', icon: Flame, detail: 'A more peaceful Aarti experience by the river bank.' }
+            ],
+            tip: 'Hire a scooter for flexible movement across town.'
+        }
+    ];
+
+    const budgetData = isNainital ? {
+        hotel: '₹1500–3000/day',
+        food: '₹400–700/day',
+        travel: '₹800–1500/day'
+    } : {
+        hotel: '₹1200–2500/day',
+        food: '₹300–600/day',
+        travel: '₹500–1000/day'
+    };
+
     if (generating) {
         return (
             <div style={{ height: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', textAlign: 'center' }}>
@@ -98,6 +135,8 @@ const AITripPlanner = () => {
         );
     }
 
+    const currentItinerary = isRishikesh ? rishikeshItinerary : (isNainital ? nainitalItinerary : null);
+
     return (
         <div style={{ padding: '24px', paddingBottom: '100px' }}>
             <header style={{ marginBottom: '32px', position: 'relative' }}>
@@ -114,8 +153,8 @@ const AITripPlanner = () => {
             </header>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                {isNainital ? (
-                    nainitalItinerary.map((dayPlan, dayIdx) => (
+                {currentItinerary ? (
+                    currentItinerary.map((dayPlan, dayIdx) => (
                         <div key={dayIdx}>
                             <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span style={{ background: 'var(--accent-primary)', color: 'white', width: '24px', height: '24px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>{dayPlan.day}</span>
@@ -153,7 +192,13 @@ const AITripPlanner = () => {
                     <div>
                         <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Day 1: Arrival & Exploration</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            {mockItinerary.map((item, index) => (
+                            {[
+                                { time: '09:00 AM', activity: 'Breakfast at local cafe', icon: Coffee },
+                                { time: '11:00 AM', activity: 'Visit the main city square', icon: Map },
+                                { time: '01:30 PM', activity: 'Lunch at traditional restaurant', icon: Utensils },
+                                { time: '04:00 PM', activity: 'Scenic viewpoint photography', icon: Camera },
+                                { time: '07:30 PM', activity: 'Evening sunset cruise', icon: Calendar }
+                            ].map((item, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, x: -20 }}
@@ -176,21 +221,21 @@ const AITripPlanner = () => {
                 )}
             </div>
 
-            {isNainital && (
+            {(isNainital || isRishikesh) && (
                 <Card style={{ marginTop: '32px', padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '12px' }}>Estimated Budget (Per Person)</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                             <span style={{ color: 'var(--text-secondary)' }}>Hotel (mid-range)</span>
-                            <span style={{ fontWeight: '600' }}>₹1500–3000/day</span>
+                            <span style={{ fontWeight: '600' }}>{budgetData.hotel}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                             <span style={{ color: 'var(--text-secondary)' }}>Food</span>
-                            <span style={{ fontWeight: '600' }}>₹400–700/day</span>
+                            <span style={{ fontWeight: '600' }}>{budgetData.food}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                             <span style={{ color: 'var(--text-secondary)' }}>Local travel</span>
-                            <span style={{ fontWeight: '600' }}>₹800–1500/day</span>
+                            <span style={{ fontWeight: '600' }}>{budgetData.travel}</span>
                         </div>
                     </div>
                 </Card>

@@ -9,7 +9,8 @@ const Dashboard = () => {
 
     const upcomingTrips = [
         { id: 1, destination: 'Paris, France', date: 'Sep 12 - Sep 18', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80' },
-        { id: 2, destination: 'Tokyo, Japan', date: 'Oct 05 - Oct 15', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80' }
+        { id: 2, destination: 'Tokyo, Japan', date: 'Oct 05 - Oct 15', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80' },
+        { id: 3, destination: 'Nainital, India', date: 'Feb 16 - Feb 19', image: 'https://en.wikipedia.org/wiki/Nainital' }
     ];
 
     return (
