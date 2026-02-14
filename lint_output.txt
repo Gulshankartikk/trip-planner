@@ -1,0 +1,14 @@
+npm warn "lint_output.txt" is being parsed as a normal command line argument.
+npm warn Unknown cli config "--Path". This will stop working in the next major version of npm.
+
+> trip-planner@0.0.0 lint
+> eslint . Check-Content lint_output.txt
+
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.2
+
+No files matching the pattern "Check-Content" were found.
+Please check for typing mistakes in the pattern.
+
