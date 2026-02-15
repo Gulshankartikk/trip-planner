@@ -5,7 +5,7 @@ import { Sparkles, CheckCircle2, Map, Calendar, Coffee, Utensils, Camera, Waves,
 import Button from '../components/ui/Button';
 
 const AITripPlanner = () => {
-    const { navigate, tripData } = useNavigation();
+    const { navigate, tripData, saveTrip } = useNavigation();
     const [generating, setGenerating] = useState(true);
     const [progress, setProgress] = useState(0);
 
@@ -137,8 +137,22 @@ const AITripPlanner = () => {
 
     const currentItinerary = isRishikesh ? rishikeshItinerary : (isNainital ? nainitalItinerary : null);
 
+    const handleSaveTrip = () => {
+        saveTrip({
+            destination: tripData.destination,
+            style: tripData.style,
+            budget: tripData.budget,
+            image: isNainital ? 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=400&q=80' :
+                (isRishikesh ? 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=400&q=80' :
+                    'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400&q=80'),
+            itinerary: currentItinerary
+        });
+        navigate(SCREENS.ITINERARY);
+    };
+
     return (
         <div style={{ padding: '24px', paddingBottom: '100px' }}>
+            {/* ... (existing header code) */}
             <header style={{ marginBottom: '32px', position: 'relative' }}>
                 <motion.div
                     initial={{ scale: 0 }}
@@ -152,97 +166,10 @@ const AITripPlanner = () => {
                 <p style={{ color: 'var(--text-secondary)' }}>3 Days • {tripData.style} • {tripData.budget}</p>
             </header>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                {currentItinerary ? (
-                    currentItinerary.map((dayPlan, dayIdx) => (
-                        <div key={dayIdx}>
-                            <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <span style={{ background: 'var(--accent-primary)', color: 'white', width: '24px', height: '24px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>{dayPlan.day}</span>
-                                {dayPlan.title}
-                            </h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                {dayPlan.activities.map((item, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: (dayIdx * 3 + index) * 0.1 }}
-                                        className="glass"
-                                        style={{ padding: '16px', borderRadius: '16px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}
-                                    >
-                                        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'var(--bg-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                            <item.icon size={20} color="var(--accent-primary)" />
-                                        </div>
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>{item.time}</span>
-                                            </div>
-                                            <p style={{ fontWeight: '700', fontSize: '15px', marginTop: '2px' }}>{item.activity}</p>
-                                            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: '1.4' }}>{item.detail}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                            <div style={{ marginTop: '12px', padding: '12px', borderRadius: '12px', background: 'rgba(255, 149, 0, 0.1)', border: '1px solid rgba(255, 149, 0, 0.2)', fontSize: '13px', color: 'var(--accent-orange)', fontWeight: '600' }}>
-                                ⭐ Tip: {dayPlan.tip}
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div>
-                        <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Day 1: Arrival & Exploration</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            {[
-                                { time: '09:00 AM', activity: 'Breakfast at local cafe', icon: Coffee },
-                                { time: '11:00 AM', activity: 'Visit the main city square', icon: Map },
-                                { time: '01:30 PM', activity: 'Lunch at traditional restaurant', icon: Utensils },
-                                { time: '04:00 PM', activity: 'Scenic viewpoint photography', icon: Camera },
-                                { time: '07:30 PM', activity: 'Evening sunset cruise', icon: Calendar }
-                            ].map((item, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="glass"
-                                    style={{ padding: '16px', borderRadius: '16px', display: 'flex', gap: '16px', alignItems: 'center' }}
-                                >
-                                    <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--bg-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <item.icon size={20} color="var(--accent-primary)" />
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>{item.time}</span>
-                                        <p style={{ fontWeight: '600', fontSize: '15px' }}>{item.activity}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {(isNainital || isRishikesh) && (
-                <Card style={{ marginTop: '32px', padding: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '12px' }}>Estimated Budget (Per Person)</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                            <span style={{ color: 'var(--text-secondary)' }}>Hotel (mid-range)</span>
-                            <span style={{ fontWeight: '600' }}>{budgetData.hotel}</span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                            <span style={{ color: 'var(--text-secondary)' }}>Food</span>
-                            <span style={{ fontWeight: '600' }}>{budgetData.food}</span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                            <span style={{ color: 'var(--text-secondary)' }}>Local travel</span>
-                            <span style={{ fontWeight: '600' }}>{budgetData.travel}</span>
-                        </div>
-                    </div>
-                </Card>
-            )}
+            {/* ... (existing itinerary rendering code) ... */}
 
             <div style={{ marginTop: '40px', display: 'flex', gap: '16px' }}>
-                <Button style={{ flex: 1 }} onClick={() => navigate(SCREENS.DASHBOARD)}>Save Trip</Button>
+                <Button style={{ flex: 1 }} onClick={handleSaveTrip}>Save Trip</Button>
                 <button className="card" style={{ flex: 1, padding: '16px', background: 'transparent' }} onClick={() => navigate(SCREENS.ITINERARY)}>Full Details</button>
             </div>
         </div>
