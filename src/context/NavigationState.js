@@ -10,7 +10,8 @@ export const SCREENS = {
     ITINERARY: 'ITINERARY',
     BUDGET: 'BUDGET',
     MAP: 'MAP',
-    PROFILE: 'PROFILE'
+    PROFILE: 'PROFILE',
+    PROMPT_BUILDER: 'PROMPT_BUILDER'
 };
 
 export const NavigationContext = createContext();

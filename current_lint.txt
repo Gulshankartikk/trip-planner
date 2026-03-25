@@ -1,4 +1,104 @@
 
-> trip-planner@0.0.0 lint
-> eslint .
+C:\Users\kg872\Desktop\trip planner\src\screens\PromptBuilder.jsx
+   48:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  46 |         }
+  47 |
+> 48 |         setGeneratedPrompt(basePrompt);
+     |         ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  49 |     }, [formData, enhancements]);
+  50 |
+  51 |     const handleCopy = () => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/set-state-in-effect
+  165:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  163 |                 <Card style={{ padding: '20px' }}>
+  164 |                     <h2 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>Enhancements</h2>
+> 165 |                     <ToggleRow 
+      |                      ^^^^^^^^^ This component is created during render
+  166 |                         label="Budget Breakdown" 
+  167 |                         description="Add category cost breakdown and free alternatives." 
+  168 |                         checked={enhancements.budgetBreakdown} 
+
+   78 |     };
+   79 |
+>  80 |     const ToggleRow = ({ label, description, checked, onChange }) => (
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  81 |         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--card-border)' }}>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  82 |             <div style={{ flex: 1, paddingRight: '16px' }}>
+      ΓÇª
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 111 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 112 |     );
+      | ^^^^^^ The component is created during render here
+  113 |
+  114 |     return (
+  115 |         <div style={{ padding: '24px', paddingBottom: '100px' }}>  react-hooks/static-components
+  171:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  169 |                         onChange={v => setEnhancements({...enhancements, budgetBreakdown: v})} 
+  170 |                     />
+> 171 |                     <ToggleRow 
+      |                      ^^^^^^^^^ This component is created during render
+  172 |                         label="Sustainability" 
+  173 |                         description="Prioritize eco-friendly transport and low-carbon activities." 
+  174 |                         checked={enhancements.sustainability} 
+
+   78 |     };
+   79 |
+>  80 |     const ToggleRow = ({ label, description, checked, onChange }) => (
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  81 |         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--card-border)' }}>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  82 |             <div style={{ flex: 1, paddingRight: '16px' }}>
+      ΓÇª
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 111 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 112 |     );
+      | ^^^^^^ The component is created during render here
+  113 |
+  114 |     return (
+  115 |         <div style={{ padding: '24px', paddingBottom: '100px' }}>                                      react-hooks/static-components
+  177:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  175 |                         onChange={v => setEnhancements({...enhancements, sustainability: v})} 
+  176 |                     />
+> 177 |                     <ToggleRow 
+      |                      ^^^^^^^^^ This component is created during render
+  178 |                         label="Alternatives & Backup" 
+  179 |                         description="Add backup options for rain, plus packing & visa info." 
+  180 |                         checked={enhancements.alternatives} 
+
+   78 |     };
+   79 |
+>  80 |     const ToggleRow = ({ label, description, checked, onChange }) => (
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  81 |         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--card-border)' }}>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  82 |             <div style={{ flex: 1, paddingRight: '16px' }}>
+      ΓÇª
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 111 |         </div>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 112 |     );
+      | ^^^^^^ The component is created during render here
+  113 |
+  114 |     return (
+  115 |         <div style={{ padding: '24px', paddingBottom: '100px' }}>                                        react-hooks/static-components
+
+Γ£û 4 problems (4 errors, 0 warnings)
 

@@ -12,6 +12,7 @@ const Explore = lazy(() => import('./screens/Explore'))
 const AITripPlanner = lazy(() => import('./screens/AITripPlanner'))
 const Itinerary = lazy(() => import('./screens/Itinerary'))
 const BudgetTracker = lazy(() => import('./screens/BudgetTracker'))
+const PromptBuilder = lazy(() => import('./screens/PromptBuilder'))
 const MapExplorer = lazy(() => import('./screens/Placeholders').then(m => ({ default: m.MapExplorer })))
 const Profile = lazy(() => import('./screens/Placeholders').then(m => ({ default: m.Profile })))
 
@@ -40,6 +41,8 @@ function AppContent() {
         return <MapExplorer />
       case SCREENS.PROFILE:
         return <Profile />
+      case SCREENS.PROMPT_BUILDER:
+        return <PromptBuilder />
       default:
         return <Dashboard />
     }

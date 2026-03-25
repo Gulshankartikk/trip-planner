@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import { useNavigation, SCREENS } from '../context/NavigationState';
-import { Search, MapPin, Calendar, Plus, ChevronRight, TrendingUp } from 'lucide-react';
+import { Search, MapPin, Calendar, Plus, ChevronRight, TrendingUp, Sparkles } from 'lucide-react';
 
 const Dashboard = () => {
     const { navigate, setTripData, tripData, trips } = useNavigation();
@@ -86,6 +86,23 @@ const Dashboard = () => {
                         <span style={{ fontWeight: '600', fontSize: '14px' }}>New Trip</span>
                     </motion.div>
                 </div>
+            </section>
+
+            <section style={{ marginBottom: '32px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <h2 style={{ fontSize: '18px', fontWeight: '700' }}>AI Tools</h2>
+                    <Sparkles size={20} color="var(--accent-primary)" />
+                </div>
+                <Card style={{ padding: '16px', display: 'flex', gap: '16px', alignItems: 'center' }} onClick={() => navigate(SCREENS.PROMPT_BUILDER)}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-teal))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Sparkles size={24} color="white" />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <h3 style={{ fontSize: '16px', fontWeight: '700' }}>Expert Prompt Builder</h3>
+                        <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>Generate optimized prompts for AI planners</p>
+                    </div>
+                    <ChevronRight size={20} color="var(--text-secondary)" />
+                </Card>
             </section>
 
             <section>

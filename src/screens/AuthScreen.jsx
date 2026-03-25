@@ -52,7 +52,7 @@ const AuthScreen = () => {
                         <label style={{ fontSize: '14px', fontWeight: '600', marginLeft: '4px' }}>Email</label>
                         <input
                             type="email"
-                            placeholder="hello@example.com"
+                            placeholder="example@gmail.com"
                             style={{
                                 padding: '12px 16px',
                                 borderRadius: '12px',
